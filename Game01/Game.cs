@@ -9,7 +9,7 @@ namespace Game01
     {
         public void Start()
         {
-            Console.WriteLine("The game is starting.");
+            //Console.WriteLine("The game is starting.");
             /*
             SetCursorPosition(4, 2);
             Write("X");
@@ -17,23 +17,20 @@ namespace Game01
 
             string[,] grid =                                //2 dimensional array
             {
-                {"1", "2", "3" },
-                {"4", "5", "6" },
-                {"7", "8", "9" },
+                {"=", "=", "=" , "=", "=", "=" , "="},
+                {"=", " ", "=" , " ", " ", " " , "X"},
+                {"O", " ", "=" , " ", "=", " " , "="},
+                {"=", " ", "=" , " ", "=", " " , "="},
+                {"=", " ", " " , " ", "=", " " , "="},
+                {"=", "=", "=" , "=", "=", "=" , "="},
             };
 
-            int rows = grid.GetLength(0);                   //(0) for rows in 2D array
-            int cols = grid.GetLength(1);                   //(1) for columns in 2D array
-            for (int y = 0; y < rows; y++)                  //loop to build map
-            {
-                for (int x = 0; x < cols; x++)
-                {
-                    string element = grid[y, x];            //columns vs rows
-                    SetCursorPosition(x, y);                //rows vs columns
-                    Write(element);
-                }
-            }
+            World myWorld = new World(grid);
+            myWorld.Draw();
 
+            WriteLine(myWorld.IsPositionWalkable(0, 0));    //false
+            WriteLine(myWorld.IsPositionWalkable(1, 1));    //true
+            WriteLine(myWorld.IsPositionWalkable(6, 1));    //true
             Console.WriteLine("\n\nPress any key to exit");
             Console.ReadKey(true);
         }
