@@ -11,6 +11,7 @@ namespace Game05___MultiThread_with_Input
     {
         private World myWorld;
         private Player currentPlayer;
+        private Enemy enemyOne;
 
         public void Start()
         {
@@ -18,6 +19,8 @@ namespace Game05___MultiThread_with_Input
             Console.CursorVisible = false;
             currentPlayer = new Player(2, 2);
             myWorld = new World();
+
+            enemyOne = new Enemy(10, 10);
 
             Thread t1 = new Thread(RunGameLoop);
             Thread t2 = new Thread(Enemy);
@@ -93,10 +96,9 @@ namespace Game05___MultiThread_with_Input
 
         private void Enemy()
         {
-            int D = 10;
-            int C = 10;
             
-            SetCursorPosition(C, D);
+            
+            SetCursorPosition(enemyOne.X, enemyOne.Y);
             while (true)
             {
                 
@@ -106,31 +108,32 @@ namespace Game05___MultiThread_with_Input
                 int B = rand.Next(0, 2);
 
                 
-                if (currentPlayer.X < C)
+                if (currentPlayer.X < enemyOne.X)
                 {
                     A = A * -1;
                 }
-                if (currentPlayer.Y < D)
+                if (currentPlayer.Y < enemyOne.Y)
                 {
                     B = B * -1;
                 }
 
-                C = C + A;
-                D = D + B;
+                enemyOne.X = enemyOne.X + A;
+                enemyOne.Y = enemyOne.Y + B;
 
-                if (C < 0)
+                if (enemyOne.X < 0)
                 {
-                    C = 0;
+                    enemyOne.X = 0;
                 }
-                if (D < 0)
+                if (enemyOne.Y < 0)
                 {
-                    D = 0;
+                    enemyOne.Y = 0;
                 }
 
-                SetCursorPosition(C, D);
-                ForegroundColor = ConsoleColor.Cyan;
-                Write("0");
-                if (C == currentPlayer.X && D == currentPlayer.Y)
+                enemyOne.DrawEnemy();
+                //SetCursorPosition(enemyOne.X, enemyOne.Y);
+                //ForegroundColor = ConsoleColor.Cyan;
+                //Write("0");
+                if (enemyOne.X == currentPlayer.X && enemyOne.Y == currentPlayer.Y)
                 {
                     ResetColor();
                     Console.WriteLine("You have died!");
@@ -138,10 +141,10 @@ namespace Game05___MultiThread_with_Input
                 }
 
 
-                ResetColor();
-                Thread.Sleep(500);
-                SetCursorPosition(C, D);
-                Write(" ");
+                //ResetColor();
+                //Thread.Sleep(500);
+                //SetCursorPosition(enemyOne.X, enemyOne.Y);
+                //Write(" ");
 
             }
             Environment.Exit(0);
