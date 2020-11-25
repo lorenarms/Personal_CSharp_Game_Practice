@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using static System.Console;
 
-namespace Game01
+namespace Game03___The_Maze
 {
     class World
     {
         private string[,] Grid;
         private int Rows;
         private int Cols;
+        public int X = 0;
+        public int Y = 0;
 
         public World(string[,] grid)
         {
@@ -20,6 +22,7 @@ namespace Game01
 
         public void Draw()
         {
+            
             for (int y = 0; y < Rows; y++)
             {
                 for (int x = 0; x < Cols; x++)
@@ -30,15 +33,26 @@ namespace Game01
                     {
                         ForegroundColor = ConsoleColor.Green;
                     }
+                    else if (element == "Θ")
+                    {
+                        ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    else if (element == "0")
+                    {
+                        X = CursorLeft - 1;
+                        Y = CursorTop - 1;
+                    }
                     else
                     {
                         ForegroundColor = ConsoleColor.White;
                     }
                     
                     
+                    
                     Write(element);
 
                 }
+                
             }
         }
 
@@ -54,10 +68,14 @@ namespace Game01
             {
                 return false;
             }
-
+            if (Grid[y,x] == "Θ")
+            {
+                Game.coinCount++;
+            }
             //Check if the grid is a walkable tile
-            
-            return Grid[y, x] == " " || Grid[y, x] == "X";
+
+
+            return Grid[y, x] == " " || Grid[y, x] == "X" || Grid[y, x] == "Θ";
         }
             
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static System.Console;
 
-namespace Game01
+namespace Game03___The_Maze
 
 {
     class Player
