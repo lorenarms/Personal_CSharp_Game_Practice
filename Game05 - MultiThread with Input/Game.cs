@@ -12,6 +12,8 @@ namespace Game05___MultiThread_with_Input
         private World myWorld;
         private Player currentPlayer;
         private Enemy enemyOne;
+        private Enemy enemyTwo;
+
 
         public void Start()
         {
@@ -21,6 +23,7 @@ namespace Game05___MultiThread_with_Input
             myWorld = new World();
 
             enemyOne = new Enemy(10, 10);
+            //enemyOne = new Enemy(5, 5);
 
             Thread t1 = new Thread(RunGameLoop);
             Thread t2 = new Thread(Enemy);
@@ -128,11 +131,13 @@ namespace Game05___MultiThread_with_Input
                 {
                     enemyOne.Y = 0;
                 }
+                if (myWorld.IsPositionWalkable(enemyOne.X, enemyOne.Y))
+                {
+                    enemyOne.DrawEnemy();
+                }
 
-                enemyOne.DrawEnemy();
-                //SetCursorPosition(enemyOne.X, enemyOne.Y);
-                //ForegroundColor = ConsoleColor.Cyan;
-                //Write("0");
+                
+                
                 if (enemyOne.X == currentPlayer.X && enemyOne.Y == currentPlayer.Y)
                 {
                     ResetColor();
@@ -140,11 +145,6 @@ namespace Game05___MultiThread_with_Input
                     break;
                 }
 
-
-                //ResetColor();
-                //Thread.Sleep(500);
-                //SetCursorPosition(enemyOne.X, enemyOne.Y);
-                //Write(" ");
 
             }
             Environment.Exit(0);
