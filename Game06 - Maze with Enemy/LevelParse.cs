@@ -10,9 +10,9 @@ namespace Game06___Maze_with_Enemy
         public static string[,] ParseFileToArray(string filePath)
         {
             string[] lines = File.ReadAllLines(filePath);
-            string firstLine = lines[0];
+            //string firstLine = lines[0];
             int rows = lines.Length;
-            int cols = firstLine.Length;
+            int cols = lines[0].Length;
             string[,] grid = new string[rows, cols];
 
             for (int y = 0; y < rows; y++)
